@@ -5,9 +5,7 @@ namespace StraightFlush
 {
     public interface ICardDeck
     {
-        public void Shuffle();
-
-        public List<Card> DrawCards(int i);
-
+        void Shuffle();
+        List<Card> DrawCards(int i);
     }
 }

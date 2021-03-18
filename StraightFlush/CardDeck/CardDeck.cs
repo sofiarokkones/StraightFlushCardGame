@@ -15,11 +15,7 @@ namespace StraightFlush
             {
                 for (int i = 1; i < 14; i++)
                 {
-                    Cards.Add(new Card()
-                    {
-                        Suite = suite,
-                        Value = i
-                    });
+                    Cards.Add(new Card(suite, i));
                 }
             }
         }

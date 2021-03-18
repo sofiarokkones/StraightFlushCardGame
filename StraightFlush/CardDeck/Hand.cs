@@ -5,19 +5,11 @@ namespace StraightFlush
 {
     public class Hand
     {
-        public List<Card> cardsInHand;
+        public List<Card> CardsInHand { get; }
 
         public Hand(List<Card> cardsInHand)
         {
-            this.cardsInHand = cardsInHand;
-        }
-
-        public void PrintHand(List<Card> cardsInHand)
-        {
-            foreach (Card card in cardsInHand)
-            {
-                Console.WriteLine($"{card.Suite} - {card.NamedValue}");
-            }
+            CardsInHand = cardsInHand;
         }
     }
 }

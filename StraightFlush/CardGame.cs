@@ -14,7 +14,6 @@ namespace StraightFlush
             _cardDeck = cardDeck;
         }
 
-
         public bool PlayGame(IList<IRule> rules)
         {
             _cardDeck.Shuffle();

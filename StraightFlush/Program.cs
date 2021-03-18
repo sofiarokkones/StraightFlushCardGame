@@ -31,7 +31,7 @@ namespace StraightFlush
 
             // Present the result
             var hand = game.GetHand();
-            var sortedHand = hand.cardsInHand.OrderBy(x => x.Value).ToList();
+            var sortedHand = hand.CardsInHand.OrderBy(x => x.Value).ToList();
 
             // Reorder if royal straight
             if(sortedHand.LastOrDefault().Value == 13 && sortedHand.FirstOrDefault().Value == 1)
@@ -42,7 +42,10 @@ namespace StraightFlush
             }
 
             Console.WriteLine($"The final hand:");
-            hand.PrintHand(sortedHand);
+            foreach (Card card in sortedHand)
+            {
+                Console.WriteLine($"{card.Suite} - {card.NamedValue}");
+            }
 
             Console.WriteLine($"Time: {ts:N} seconds ");
             Console.WriteLine($"Tries: {tries} attempts ");

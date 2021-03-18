@@ -3,8 +3,14 @@ namespace StraightFlush
 {
     public class Card
     {
-        public Suites Suite { get; set; }
-        public int Value { get; set; }
+        public Suites Suite { get; }
+        public int Value { get; }
+
+        public Card(Suites suite, int value)
+        {
+            Suite = suite;
+            Value = value;
+        }
 
         public enum Suites
         {
@@ -37,7 +43,6 @@ namespace StraightFlush
                         name = Value.ToString();
                         break;
                 }
-
                 return name;
             }
         }
