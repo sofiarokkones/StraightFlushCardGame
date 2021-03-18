@@ -15,8 +15,8 @@ namespace StraightFlush
 
             List<IRule> rules = new List<IRule>();
 
-            rules.Add(new StraightRule());
             rules.Add(new FlushRule());
+            rules.Add(new StraightRule());
             //rules.Add(new RoyalStraightRule());
 
             var tries = 0;
@@ -39,8 +39,9 @@ namespace StraightFlush
 
             var ts = sw.Elapsed.TotalSeconds;
 
-            Console.WriteLine($"Time {ts: N3} s");
-            Console.WriteLine($"{tries} tries was executed to reach a Straight Flush! ");
+            Console.WriteLine($"Time: {ts:N} seconds ");
+            Console.WriteLine($"Tries: {tries} attempts ");
+            Console.WriteLine($"There were {tries/ts:N} tries per second executed");
         }
     }
 }

@@ -7,7 +7,7 @@ namespace CardGameTest
     [TestClass]
     public class CardGameTester
     {
-        private Hand handStrightFlush;
+        private Hand handStraightFlush;
         private Hand handRandom;
         private Hand handRoyal;
         private readonly List<Card> cardsStrightFlush = new List<Card>();
@@ -18,6 +18,7 @@ namespace CardGameTest
         [TestInitialize]
         public void InitializeCardDeck()
         {
+            // STRIAGHT FLUSH HAND
             for (int i = 1; i < 6; i++)
             {
                 cardsStrightFlush.Add(new Card()
@@ -26,17 +27,18 @@ namespace CardGameTest
                     Value = i
                 });
             }
-            handStrightFlush = new Hand(cardsStrightFlush);
+            handStraightFlush = new Hand(cardsStrightFlush);
 
+            // RANDOM HAND
             cardsRandom.Add(new Card()
             {
                 Suite = Card.Suites.Clubs,
-                Value = 2
+                Value = 1
             });
             cardsRandom.Add(new Card()
             {
                 Suite = Card.Suites.Hearts,
-                Value = 6
+                Value = 10
             });
             cardsRandom.Add(new Card()
             {
@@ -55,31 +57,20 @@ namespace CardGameTest
             });
             handRandom = new Hand(cardsRandom);
 
+            // ROYAL HAND
             cardsRoyal.Add(new Card()
             {
                 Suite = Card.Suites.Clubs,
                 Value = 1
             });
-            cardsRoyal.Add(new Card()
+            for (int i = 10; i < 14; i++)
             {
-                Suite = Card.Suites.Clubs,
-                Value = 12
-            });
-            cardsRoyal.Add(new Card()
-            {
-                Suite = Card.Suites.Clubs,
-                Value = 11
-            });
-            cardsRoyal.Add(new Card()
-            {
-                Suite = Card.Suites.Clubs,
-                Value = 13
-            });
-            cardsRoyal.Add(new Card()
-            {
-                Suite = Card.Suites.Clubs,
-                Value = 10
-            });
+                cardsRoyal.Add(new Card()
+                {
+                    Suite = Card.Suites.Clubs,
+                    Value = i
+                });
+            }
             handRoyal = new Hand(cardsRoyal);
         }
 
@@ -87,14 +78,14 @@ namespace CardGameTest
         public void Test_correct_flush_rule()
         {
             rule = new FlushRule();
-            Assert.IsTrue(rule.ValidateRule(handStrightFlush));
+            Assert.IsTrue(rule.ValidateRule(handStraightFlush));
         }
 
         [TestMethod]
         public void Test_correct_straight_rule()
         {
             rule = new StraightRule();
-            Assert.IsTrue(rule.ValidateRule(handStrightFlush));
+            Assert.IsTrue(rule.ValidateRule(handStraightFlush));
         }
 
         [TestMethod]
@@ -124,8 +115,5 @@ namespace CardGameTest
             rule = new RoyalStraightRule();
             Assert.IsFalse(rule.ValidateRule(handRandom));
         }
-
-
-
     }
 }

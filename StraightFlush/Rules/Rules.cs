@@ -8,13 +8,10 @@ namespace StraightFlush
         public bool ValidateRule(Hand hand)
         {
             var firstSuite = hand.cardsInHand.First().Suite;
-
-            foreach(Card card in hand.cardsInHand)
+            foreach (Card card in hand.cardsInHand)
             {
-                if(firstSuite != card.Suite)
-                {
+                if (firstSuite != card.Suite)
                     return false;
-                }
             }
             return true;
         }
@@ -25,7 +22,7 @@ namespace StraightFlush
     {
         public bool ValidateRule(Hand hand)
         {
-            var sortedHand = hand.cardsInHand.OrderBy(x => x.Value); // Descending
+            var sortedHand = hand.cardsInHand.OrderBy(x => x.Value);
             var prevCardVal = sortedHand.First().Value;
             var first = true;
 
@@ -33,16 +30,10 @@ namespace StraightFlush
             {
                 if (!first)
                 {
-                    if (prevCardVal == 1 && card.Value == 10)
-                    {
-                        // continue --> high straight?
-                    }
-                    else
+                    if (!(prevCardVal == 1 && card.Value == 10))
                     {
                         if (!(prevCardVal == card.Value - 1))
-                        {
                             return false;
-                        }
                     }
                 }
                 first = false;
@@ -63,36 +54,23 @@ namespace StraightFlush
 
             foreach (Card card in sortedHand)
             {
-                if (!first)
+                if (first && prevCardVal != 1)
                 {
-                    if (prevCardVal == 1 && card.Value == 10)
-                    {
-                        // continue --> high straight?
-                    }
-                    else
-                    {
-                        if (!first && !(prevCardVal == card.Value - 1))
-                        {
-                            return false;
-                        }
-                    }
-                }else
+                    return false;
+                }
+                else if (!(prevCardVal == 1 && card.Value == 10))
                 {
-                    if (prevCardVal != 1)                 
-                        return false;   
+                    if (!first && !(prevCardVal == card.Value - 1))
+                        return false;
                 }
                 first = false;
                 prevCardVal = card.Value;
             }
-
             if (prevCardVal != 13)
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
     }
 }
