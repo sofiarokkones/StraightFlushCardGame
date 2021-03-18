@@ -18,7 +18,7 @@ namespace CardGameTest
         [TestInitialize]
         public void InitializeCardDeck()
         {
-            // STRIAGHT FLUSH HAND
+            // STRAIGHT FLUSH HAND
             for (int i = 1; i < 6; i++)
             {
                 cardsStrightFlush.Add(new Card()

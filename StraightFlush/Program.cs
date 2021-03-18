@@ -26,22 +26,27 @@ namespace StraightFlush
             {
                 tries++;
             }
-
             sw.Stop();
+            var ts = sw.Elapsed.TotalSeconds;
+
+            // Present the result
             var hand = game.GetHand();
-            var sortedHand = hand.cardsInHand.OrderBy(x => x.Value);
+            var sortedHand = hand.cardsInHand.OrderBy(x => x.Value).ToList();
 
-
-            foreach (Card card in sortedHand)
+            // Reorder if royal straight
+            if(sortedHand.LastOrDefault().Value == 13 && sortedHand.FirstOrDefault().Value == 1)
             {
-                Console.WriteLine($"{card.Suite} - {card.Value}");
+                var last = sortedHand.FirstOrDefault();
+                sortedHand.RemoveAt(0);
+                sortedHand.Add(last);
             }
 
-            var ts = sw.Elapsed.TotalSeconds;
+            Console.WriteLine($"The final hand:");
+            hand.PrintHand(sortedHand);
 
             Console.WriteLine($"Time: {ts:N} seconds ");
             Console.WriteLine($"Tries: {tries} attempts ");
-            Console.WriteLine($"There were {tries/ts:N} tries per second executed");
+            Console.WriteLine($"There were {tries/ts:N} tries per second executed.");
         }
     }
 }

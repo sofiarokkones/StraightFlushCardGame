@@ -7,13 +7,7 @@ namespace StraightFlush
     {
         public bool ValidateRule(Hand hand)
         {
-            var firstSuite = hand.cardsInHand.First().Suite;
-            foreach (Card card in hand.cardsInHand)
-            {
-                if (firstSuite != card.Suite)
-                    return false;
-            }
-            return true;
+            return hand.cardsInHand.GroupBy(c => c.Suite).Count(group => group.Count() >= hand.cardsInHand.Count) == 1;
         }
     }
 
